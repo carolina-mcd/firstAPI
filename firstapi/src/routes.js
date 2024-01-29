@@ -7,9 +7,15 @@ module.exports = [
         handler: UserController.listUsers,
     },
     {
-        endpoint: '/produtos',
+        endpoint: '/users/:id',
         method: 'GET',
-        handler: UserController.listUsers,
+        handler: UserController.getUserById,
     },
+    {
+        endpoint: '/users',
+        method: 'POST',
+        handler: UserController.createUser,
+    },
+    
 ];
 
