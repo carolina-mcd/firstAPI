@@ -27,8 +27,6 @@ const server = http.createServer((request, response) => {
         routeObj.endpoint === pathname && routeObj.method === request.method // Verificando a rota.
     ));
 
-    console.log( 'route ----->', route )
-
     if(route) {
         request.query = parsedUrl.query;
         request.params = { id };
@@ -38,13 +36,12 @@ const server = http.createServer((request, response) => {
         response.end(JSON.stringify(body))
         };
 
-        if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
+        if (['POST', 'PUT', 'PATCH'].includes(request.method)) { // <--------------------------------
             bodyParser(request, () => route.handler(request, response));
         } else {
             route.handler(request, response);
         }
-
-        route.handler(request, response);
+        
     } else {
         response.writeHead(404, { 'Content-Type': 'text/html' });
         response.end(`Cannot ${request.method} ${parsedUrl.pathname}`);
